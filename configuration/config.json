@@ -1,0 +1,16 @@
+{
+  "database": {
+    "mongo": {
+      "host": "localhost",
+      "port": 27017,
+      "db": "bird-repository"
+    }
+  },
+  "server": {
+    "host": "0.0.0.0",
+    "port": 27001
+  },
+  "project": {
+    "name": "bird-repository-service"
+  }
+}
