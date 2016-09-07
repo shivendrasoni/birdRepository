@@ -10,7 +10,7 @@ const joi = require('joi');
 module.exports =[
     {
         method: 'GET',
-        path: 'birds',
+        path: '/birds',
         config: {
             handler: birdApiController.getAllBirds,
             description: 'Get All Birds registered and visible',
@@ -27,7 +27,7 @@ module.exports =[
     },
     {
         method: 'GET',
-        path: 'birds/{id}',
+        path: '/birds/{birdId}',
         config: {
             handler: birdApiController.getBirdById,
             description: 'Get Bird with a particular Id',
@@ -61,10 +61,10 @@ module.exports =[
     },
     {
         method: 'DELETE',
-        path: '/birds/{id}',
+        path: '/birds/{birdId}',
         config: {
             handler: birdApiController.deleteBird,
-            description: 'Soft delete a Bird',
+            description: 'Delete a Bird',
             tags: ['api', 'birds'],
             plugins: {
                 'hapi-swagger': {
