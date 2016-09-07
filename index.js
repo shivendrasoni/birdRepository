@@ -1,6 +1,8 @@
+/**
+ * Created by shivendra on 6/9/16.
+ */
 
 const config = require('./config');
-
 const Hapi = require('hapi');
 
 
@@ -11,7 +13,7 @@ server.connection({
     port: Number(config.get("server:port"))
 });
 
-server.register(require('./plugins/demo-apis'),function(err){
+server.register(require('./plugins/bird-repository-apis'),function(err){
       if(err){
           console.error("Error in loading plugins aborting Launch!",err)
       }else{
