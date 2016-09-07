@@ -1,6 +1,3 @@
-/**
- * Created by shivendra on 6/9/16.
- */
 
 "use strict";
 require("./db");
@@ -13,10 +10,10 @@ const config = require('./../../config');
 const routes = require('./routes');
 var register = function(server,options,next){
     var swaggerOptions = {
-        basePath: '/v1',
+        basePath: '/',
         sortEndpoints: 'path',
         expanded: 'none',
-        pathPrefixSize: 2,
+        pathPrefixSize: 1,
         info: {
             'title': 'Bird Repository Service API Documentation',
             'version': pack.version
