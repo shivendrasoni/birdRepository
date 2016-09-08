@@ -5,6 +5,7 @@
 'use strict';
 const birdService = require('../services/birds');
 const boom = require('boom');
+var logger = require('../utils/logger-utils').logger;
 
 module.exports = {
     getAllBirds : function (request,reply) {
@@ -21,6 +22,9 @@ module.exports = {
     getBirdById : function (request, reply) {
         var birdId = request.params.birdId;
         birdService.getBirdById(birdId, function(err, data) {
+            if(!data.active || (!data && !err)) {
+                reply(boom.notFound('the bird does not exist'))
+            }
             if (err) {
                 reply(boom.badRequest(err));
             } else {
@@ -36,7 +40,7 @@ module.exports = {
         if (!err) {
             reply(data).created('/birds/' + data.id);
         } else {
-            reply(Boom.badRequest(err));
+            reply(boom.badRequest(err));
         }
 
     });
@@ -47,7 +51,7 @@ module.exports = {
             if (err) {
                 reply(boom.badRequest(err));
             } else {
-                reply({});
+                reply(data);
             }
         })
     }
