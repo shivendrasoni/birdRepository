@@ -9,7 +9,6 @@ var logger = require('../utils/logger-utils').logger;
 
 module.exports = {
     getAllBirds : function (request,reply) {
-
         birdService.getAllBirds(function(err, data) {
             if (err) {
                 reply(boom.badRequest(err));
@@ -37,10 +36,12 @@ module.exports = {
 
     birdService.createBird(request.payload, function (err, data) {
         logger.debug("inside the create bird response. ");
-        if (!err) {
-            reply(data).created('/birds/' + data.id);
-        } else {
+        if (err) {
+            logger.error('Error in creating bird ', err);
             reply(boom.badRequest(err));
+
+        } else {
+            reply(data).created('/birds/' + data.id);
         }
 
     });
@@ -49,6 +50,7 @@ module.exports = {
         var birdId = request.params.birdId;
         birdService.deleteBirdById(birdId, function(err, data) {
             if (err) {
+                logger.error('Error in creating bird ', err);
                 reply(boom.badRequest(err));
             } else {
                 reply(data);
