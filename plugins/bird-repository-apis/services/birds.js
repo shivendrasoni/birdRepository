@@ -30,7 +30,6 @@ module.exports = {
             }
             else callback(err);
         });
-        
     },
     deleteBirdById : function (birdId, callback) {
         var query = {_id : birdId};
