@@ -5,7 +5,8 @@
 'use strict';
 const birdService = require('../services/birds');
 const boom = require('boom');
-var logger = require('../utils/logger-utils').logger;
+const logger = require('../utils/logger-utils').logger;
+const simplifyResponse = require('../utils/response-wrapper').simplifyResponse;
 
 module.exports = {
     getAllBirds : function (request,reply) {
@@ -13,7 +14,7 @@ module.exports = {
             if (err) {
                 reply(boom.badRequest(err));
             } else {
-                reply(data);
+                reply(simplifyResponse(data));
             }
         })
         
@@ -27,7 +28,7 @@ module.exports = {
             else if (err) {
                 reply(boom.badRequest(err));
             } else {
-                reply(data);
+                reply(simplifyResponse(data));
             }
         })
         
@@ -41,7 +42,7 @@ module.exports = {
             reply(boom.badRequest(err));
 
         } else {
-            reply(data).created('/birds/' + data.id);
+            reply(simplifyResponse(data)).created('/birds/' + data.id);
         }
 
     });
