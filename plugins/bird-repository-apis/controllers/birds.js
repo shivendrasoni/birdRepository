@@ -50,10 +50,11 @@ module.exports = {
         var birdId = request.params.birdId;
         birdService.deleteBirdById(birdId, function(err, data) {
             if((!data && !err) || !data.active) {
+                logger.error('the bird does not exist');
                 reply(boom.notFound('the bird does not exist'))
             }
             if (err) {
-                logger.error('Error in creating bird ', err);
+                logger.error('Error in deleting bird ', err);
                 reply(boom.badRequest(err));
             } else {
                 reply({});

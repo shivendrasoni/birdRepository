@@ -19,7 +19,7 @@ var birdSchema = new Schema({
         required: true
     },
     continents: {
-        type: String,
+        type: [String],
         required: true
     },
     added: {
@@ -30,7 +30,8 @@ var birdSchema = new Schema({
 
     visible: {
         type: Boolean,
-        required: true
+        required: true,
+        default : true
     },
     active : {
         type : Boolean,

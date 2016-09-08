@@ -18,7 +18,8 @@ module.exports =[
             plugins: {
                 'hapi-swagger': {
                     responses: {
-                        '400': {'description': 'Bad Request'}
+                        '400': {'description': 'Bad Request'},
+                        '500' : {'description' : 'Internal Server Error'}
                     }
                 }
             }
@@ -35,8 +36,15 @@ module.exports =[
             plugins: {
                 'hapi-swagger': {
                     responses: {
-                        '400': {'description': 'Bad Request'}
+                        '400': {'description': 'Bad Request'},
+                        '404': {'description': 'Resource Not Found'},
+                        '500' : {'description' : 'Internal Server Error'}
                     }
+                }
+            },
+            validate : {
+                params : {
+                    birdId : joi.string().description('Object id from the database')
                 }
             }
 
@@ -52,9 +60,21 @@ module.exports =[
             plugins: {
                 'hapi-swagger': {
                     responses: {
-                        '400': {'description': 'Bad Request'}
+                        '400': {'description': 'Bad Request'},
+                        '500' : {'description' : 'Internal Server Error'}
                     }
                 }
+            },
+            validate : {
+                payload : joi.object({
+                    name : joi.string().required().example('Pigeon'),
+                    family : joi.string().required().example('Columbidae'),
+                    continents : joi.array().items(joi.string()).example(['asia','australia']).required(),
+                    added : joi.string().example('2016-09-09'),
+                    visible : joi.boolean()
+
+                }).description('Required fields : name, family and continents. added defaults to now & visible' +
+                    ' defaults to true')
             }
 
         }
@@ -69,8 +89,15 @@ module.exports =[
             plugins: {
                 'hapi-swagger': {
                     responses: {
-                        '400': {'description': 'Bad Request'}
+                        '400': {'description': 'Bad Request'},
+                        '404': {'description': 'Resource Not Found'},
+                        '500' : {'description' : 'Internal Server Error'}
                     }
+                }
+            },
+            validate : {
+                params : {
+                    birdId : joi.string().description('Object id from the database')
                 }
             }
 
