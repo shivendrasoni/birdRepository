@@ -69,7 +69,7 @@ module.exports =[
                 payload : joi.object({
                     name : joi.string().required().example('Pigeon'),
                     family : joi.string().required().example('Columbidae'),
-                    continents : joi.array().items(joi.string()).example(['asia','australia']).required(),
+                    continents : joi.array().min(1).unique().items(joi.string()).example(['asia','australia']).required(),
                     added : joi.string().example('2016-09-09'),
                     visible : joi.boolean()
 
