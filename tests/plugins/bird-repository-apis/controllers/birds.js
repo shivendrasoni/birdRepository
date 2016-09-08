@@ -8,7 +8,7 @@ var expect = chai.expect;
 var birdController;
 chai.use(sinonChai);
 
-describe("Bird controller testing", function() {
+describe("1) Bird controller testing", function() {
 
     beforeEach(function() {
         birdController = rewire('../../../../plugins/bird-repository-apis/controllers/birds');
