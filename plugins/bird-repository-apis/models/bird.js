@@ -7,6 +7,8 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
+const moment = require('moment');
+
 var birdSchema = new Schema({
     name: {
         type: String,
@@ -21,13 +23,19 @@ var birdSchema = new Schema({
         required: true
     },
     added: {
-        type: Date,
-        required: true
+        type: String,
+        required: true,
+        default: moment().format('YYYY-MM-DD')
     },
 
     visible: {
         type: Boolean,
         required: true
+    },
+    active : {
+        type : Boolean,
+        required : true,
+        default : true
     }
 }, {timestamps: true});
 
