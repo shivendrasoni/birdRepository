@@ -8,7 +8,7 @@ const boom = require('boom');
 var logger = require('../utils/logger-utils').logger;
 var _ = require('lodash');
 
-const Bird = require('../models/bird').Bird;
+var Bird = require('../models/bird').Bird;
 
 module.exports = {
     getAllBirds : function (callback) {
