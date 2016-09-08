@@ -21,10 +21,10 @@ module.exports = {
     getBirdById : function (request, reply) {
         var birdId = request.params.birdId;
         birdService.getBirdById(birdId, function(err, data) {
-            if(!data.active || (!data && !err)) {
+            if((!data && !err) || !data.active) {
                 reply(boom.notFound('the bird does not exist'))
             }
-            if (err) {
+            else if (err) {
                 reply(boom.badRequest(err));
             } else {
                 reply(data);
@@ -49,11 +49,14 @@ module.exports = {
     deleteBird : function (request, reply) {
         var birdId = request.params.birdId;
         birdService.deleteBirdById(birdId, function(err, data) {
+            if((!data && !err) || !data.active) {
+                reply(boom.notFound('the bird does not exist'))
+            }
             if (err) {
                 logger.error('Error in creating bird ', err);
                 reply(boom.badRequest(err));
             } else {
-                reply(data);
+                reply({});
             }
         })
     }
