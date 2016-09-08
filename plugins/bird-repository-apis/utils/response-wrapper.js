@@ -9,16 +9,16 @@ module.exports = {
         if(Array.isArray(data)) {
             var responseArray = [];
 
-            data.forEach((item) =>{
-            var response = {};
-            response.id=item._id;
-            response.name=item.name;
-            response.continents=item.continents;
-            response.family=item.family;
-            response.added = item.added;
-            response.visible=item.visible;
-            responseArray.push(response);
-        })
+            data.forEach(function (item) {
+                var response = {};
+                response.id=item._id;
+                response.name=item.name;
+                response.continents=item.continents;
+                response.family=item.family;
+                response.added = item.added;
+                response.visible=item.visible;
+                responseArray.push(response);
+            });
             return responseArray;
         }
         else {
