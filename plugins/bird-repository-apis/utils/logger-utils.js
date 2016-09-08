@@ -8,7 +8,7 @@ var config = require('../../../config');
 var moment = require('moment');
 
 //******* Using winston **********//
-var winstonConsoleTransporter =
+var winstonConsoleTransporterConsole =
     new (winston.transports.Console)({
         level: config.get("logs:logLevel"),
         'timestamp': function() {
@@ -21,8 +21,22 @@ var winstonConsoleTransporter =
     });
 
 
-var winstonLoggerConfig = new (winston.Logger)({
-    transports: [winstonConsoleTransporter]
-});
+    var winstonLoggerConfig;
+    if (process.env.NODE_ENV !== 'test'){
+        winstonLoggerConfig = new (winston.Logger)({
+        transports: [winstonConsoleTransporterConsole, new (winston.transports.File)({ filename: 'logfile.log',
+                    prettyPrint: true,
+                    showLevel: true })]
+    });
+    }
+    else {
+        winstonLoggerConfig= new (winston.Logger)({
+        transports: [
+            new (winston.transports.File)({ filename: 'logfile.log',
+                    prettyPrint: true,
+                    showLevel: true })
+        ]
+    });
+    }
 
 module.exports.logger = winstonLoggerConfig;
